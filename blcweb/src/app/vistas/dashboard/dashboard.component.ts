@@ -10,7 +10,7 @@ export class DashboardComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    $("#logout").click(() => {
+    $("#logout").on("click",() => {
         
       location.href = 'login'
       

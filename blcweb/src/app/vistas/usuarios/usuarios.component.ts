@@ -17,31 +17,54 @@ export class UsuariosComponent implements OnInit {
     $("#mensajeNav").html("Conectado a medellin")
     UpdateList()
 
+    //----- ocultar las opciones de editar y eliminar
+    $("#btn_eliminar").hide()
+    $("#btn_editar").hide()
+
     
     //----------------- funciones --------------------
+    $("#logout").on("click",() => {
+        
+      location.href = 'login'
+      
+    });
+    
     $("#btn_crearU").on("click",() => {
       
+
       let document = $("#inp_documentNew").val();
       let name = $("#inp_nameNew").val();
       let email = $("#inp_emailNew").val();
       let user = $("#inp_userNew").val();
       let password = $("#inp_passwordNew").val();
       
-    
-      saveUsuer(document, name, email, user, password);
+      // compreba los valores
+
+      if(ValidTextField(document) 
+      && ValidTextField(name) 
+      && ValidTextField(email)
+      && ValidTextField(user) 
+      && ValidTextField(password)){
+        saveUsuer(document, name, email, user, password);
+      }else{
+        
+        ShowMessage("<strong>Informacion Invalida!</strong>"+
+        "Los campos son incorrectos o estan en blanco","#message")
+      }
     })
 
     $("#btn_buscar").on("click",() => {
       let document = $("#inp_document").val();
-      if (document != '') {
+
         searchUser(document);
-      }
       
     })
     
     $("#btn_eliminar").on("click",() => {
       let document = $("#inp_document").val();
-      deleteUser(document);
+      if( document != '' ){
+        deleteUser(document);
+      }
     })
 
     $("#btn_editar").on("click",() => {
@@ -51,7 +74,15 @@ export class UsuariosComponent implements OnInit {
       let user = $("#inp_user").val();
       let password = $("#inp_password").val();
 
-      updateUsuer(document, name, email,user, password)
+      if(ValidTextField(document) 
+      && ValidTextField(name) 
+      && ValidTextField(email)
+      && ValidTextField(user) 
+      && ValidTextField(password)){
+        updateUsuer(document, name, email,user, password)
+      }else{
+        ShowMessage("los campos son incorrectos o estan vacios ","#messageEdit")
+      }
 
     })
     //----------- actualiza el listado de usuarios  -------
@@ -61,7 +92,26 @@ export class UsuariosComponent implements OnInit {
     } );
     }
 
+    //---------- comporbar campos -------------------------
+
+    function ValidTextField(text:any, lengthMin:number =3, lengthMax:number = 25) {
+      if (text == "" || text == undefined || text.length < lengthMin || text.length > lengthMax) return false
+      else return true;
+
+    }
+
+    //---------- mensajes ----------------------
+
+    function ShowMessage(text:string, location:string) {
+      let message = '<div class="alert alert-danger alert-dismissible fade show" role="alert">'+
+        text+ // aqui esta el mensaje
+        '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>'+
+      '</div>'
+        $(location).html(message)
+        setTimeout(() => {$(location).html('')},5000)
+    }
     // -------- eliminar estudiantes -----------------------------
+
     function deleteUser(document: any){
      return new Promise(() => {
       let idUser = -1
@@ -94,11 +144,13 @@ export class UsuariosComponent implements OnInit {
     //------------------ buscar usuario -----------------------------
     
     function searchUser(document: any) {
+      let finded = false;
         for(var i = 0; i < usersList.length; i++) {
+
           
           if(usersList[i].cedula_usuario == document) {
-              console.log(usersList[i].cedula_usuario)
-              console.log(usersList[i].nombre_usuario)
+            finded = true;
+              //---------- imprime la el formulario con los datos del usuario
               let result = '<label for="recipient-name" class="col-form-label">nombre</label>'+
               '<input id="inp_name" type="text" class="form-control" value="'+ usersList[i].nombre_usuario +'">'+
               '<label for="recipient-name" class="col-form-label">email</label>'+
@@ -109,10 +161,19 @@ export class UsuariosComponent implements OnInit {
               '<input id="inp_password" type="text" class="form-control" value="'+ usersList[i].password +'">'
               
               $("#Form_user").html(result)
-              
+              // muestra los botones de editar y eliminar
+              $("#btn_eliminar").show()
+              $("#btn_editar").show()
               break
               
           }
+        }
+
+        if(!finded){
+          $("#Form_user").html('')
+          $("#btn_eliminar").hide()
+          $("#btn_editar").hide()
+          
         }
         
     }
