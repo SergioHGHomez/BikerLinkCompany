@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
+    <title>Menu</title>
+</head>
+
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="dashboard"><i class="fas fa-motorcycle"></i></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+                <div class="collapse navbar-collapse" id="navbarColor01">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="usuarios">Usuarios</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="clientes">Clientes</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="productos">Productos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="proveedores">Proveedores</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="reportes">Reportes</a>
+                        </li>
+                    </ul>
+                    <p id="mensajeNav"></p>
+                    <form class="d-flex">
+                        <button id="logout" class="btn btn-outline-light" type="button">Log out</button>
+                    </form>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <section class="container">
+        <div id="tbUsers"></div>
+    </section>
+    <!-- botones ventana principal  -->
+    <section class="options">
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#Modal" data-bs-whatever="@mdo">Buscar</button>
+        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#Moda2" data-bs-whatever="@mdo">Agregar</button>
+
+    </section>
+    <!-- ventana modal buscar -->
+    <section>
+
+        <div class="modal fade" id="Modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Editar</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="mb-3">
+                                <label for="recipient-name" class="col-form-label">cedula</label>
+                                <input id="inp_document" type="text" class="form-control">
+                                <!--data-->
+
+                            </div>
+                            <div id="Form_user">
+
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button id="btn_buscar" type="button" class="btn btn-primary">Buscar</button>
+                        <button id="btn_editar" type="button" class="btn btn-warning">Editar</button>
+                        <button id="btn_eliminar" type="button" class="btn btn-danger">Eliminar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ventana modal agregar -->
+    <section>
+
+        <div class="modal fade" id="Moda2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Agregar</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="mb-3">
+                                <label for="recipient-name" class="col-form-label">cedula</label>
+                                <input id="inp_documentNew" type="text" class="form-control">
+                                <!--data-->
+                                <label for="recipient-name" class="col-form-label">nombre</label>
+                                <input id="inp_nameNew" type="text" class="form-control">
+                                <label for="recipient-name" class="col-form-label">email</label>
+                                <input id="inp_emailNew" type="text" class="form-control">
+                                <label for="recipient-name" class="col-form-label">usuario</label>
+                                <input id="inp_userNew" type="text" class="form-control">
+                                <label for="recipient-name" class="col-form-label">password</label>
+                                <input id="inp_passwordNew" type="text" class="form-control">
+
+                            </div>
+                            <div id="message">
+
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button id="btn_crearU" type="button" class="btn btn-success">Crear</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</body>
+
+</html>
